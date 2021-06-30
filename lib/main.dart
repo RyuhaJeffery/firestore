@@ -20,62 +20,63 @@ class _MyAppState extends State<MyApp> {
     return MaterialApp(
       home: Scaffold(
         appBar: AppBar(
-          title: Text("hello world"),
+          title: Text("member"),
+          backgroundColor: Color(0xff67666b),
         ),
         body: Column(
           mainAxisAlignment: MainAxisAlignment.center,
           crossAxisAlignment: CrossAxisAlignment.stretch,
           children: <Widget>[
             FlatButton(
-              color: Colors.blue,
-              child:
-                  Text("create button", style: TextStyle(color: Colors.white)),
+              color: Color(0xff67666b),
+              child: Text("member 추가", style: TextStyle(color: Colors.white)),
               onPressed: () {
-                String book = "천년의_질문";
+                String n_member = "Heo";
                 firestore
-                    .collection('books')
-                    .doc(book)
-                    .set({'page': 433, 'purchase?': false, 'title': '천년의_질문'});
+                    .collection('member')
+                    .doc(n_member)
+                    .set({'age': 21, 'attendance?': false, 'part': 'Design'});
               },
             ),
             FlatButton(
-              color: Colors.blue,
-              child: Text("read button", style: TextStyle(color: Colors.white)),
+              color: Color(0xffaf0022),
+              child:
+                  Text("member 한명 가져오기", style: TextStyle(color: Colors.white)),
               onPressed: () {
                 String title = "";
                 firestore
-                    .collection("books")
-                    .doc("on_intelligence")
+                    .collection("member")
+                    .doc("Ryu")
                     .get()
                     .then((DocumentSnapshot ds) {
-                  title = ds["title"];
+                  title = ds["part"];
                   print(title);
+                  print(ds["age"]);
                 });
               },
             ),
             FlatButton(
-              color: Colors.blue,
-              child:
-                  Text("update button", style: TextStyle(color: Colors.white)),
+              color: Color(0xffd1cfd2),
+              child: Text("member update",
+                  style: TextStyle(color: Colors.black87)),
               onPressed: () {
                 firestore
-                    .collection("books")
-                    .doc("chemistry_between_us")
-                    .update({"page": 555});
+                    .collection("member")
+                    .doc("Ryu")
+                    .update({"part": "Desgramming"});
               },
             ),
             FlatButton(
-              color: Colors.blue,
-              child:
-                  Text("delete button", style: TextStyle(color: Colors.white)),
+              color: Color(0xff212345),
+              child: Text("member 삭제", style: TextStyle(color: Colors.white)),
               onPressed: () {
-                //특정 document 삭제
-                firestore.collection("books").doc("천년의_질문").delete();
-                //특정 document 의 field 하나를 삭제
+                //특정 member 삭제
+                firestore.collection("member").doc("Heo").delete();
+                //특정 member에서 하나의 field만 삭제
                 firestore
-                    .collection('books')
-                    .doc('chemistry_between_us')
-                    .update({'page': FieldValue.delete()});
+                    .collection('member')
+                    .doc('Ryu')
+                    .update({'part': FieldValue.delete()});
               },
             ),
           ],
