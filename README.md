@@ -18,3 +18,4 @@ samples, guidance on mobile development, and a full API reference.
 
 
 #6/29 AF_day2
+#6/30 AF_day3
